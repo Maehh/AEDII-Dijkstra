@@ -1,0 +1,25 @@
+node {
+	size: 15px;
+	shape: circle;
+	fill-color: white;
+	stroke-color: black;	
+	stroke-mode: plain;
+	stroke-width: 2px;
+	text-size: 20;
+	text-style: bold;
+}
+
+graph {
+	fill-color: grey;
+}
+
+edge {
+	size: 2px;
+	shape: cubic-curve;
+	fill-color: black;
+	text-size: 15;
+	text-style: bold;
+	text-color: red;
+	arrow-shape: arrow;
+	arrow-size: 10px, 6px;
+}
