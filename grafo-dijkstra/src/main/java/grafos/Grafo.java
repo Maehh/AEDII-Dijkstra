@@ -1,15 +1,19 @@
 package grafos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Grafo {
 
 	private int[][] matrizAdjacentes;
 	private int numVertices;
-
+	
+	/* Construtor para armazenar grafo;
+	 * Retorna uma matriz nXn, n sendo o numero de vertices inserido;
+	 * Todos os vertices iniciam sem nenhuma relacao (valores -1).
+	 * */
+	
 	public Grafo(int numVertices) {
-		// Inicia todos os vérticies como -1
-
 		this.numVertices = numVertices;
 		matrizAdjacentes = new int[numVertices][numVertices];
 
@@ -19,7 +23,11 @@ public class Grafo {
 			}
 
 	}
-
+	public int[][] getMatrizAdj() { return matrizAdjacentes; }
+	public int getNumVertices() { return numVertices; }
+	
+	
+	/* Insere arestas com base no numero dos verticies e seu peso  */
 	public void insereAresta(int v1, int v2, int peso) {
 
 		if (this.existeAresta(v1, v2) == false) {
@@ -27,7 +35,7 @@ public class Grafo {
 		}
 
 	}
-
+	
 	public boolean existeAresta(int v1, int v2) {
 
 		if (matrizAdjacentes[v1][v2] != -1)
@@ -36,9 +44,9 @@ public class Grafo {
 		return false;
 	}
 
-	public ArrayList<Integer> verticiesAdj(int vertice) {
+	public List<Integer> verticiesAdj(int vertice) {
 
-		ArrayList<Integer> vertices = new ArrayList<>();
+		List<Integer> vertices = new ArrayList<>();
 		for (int u = 0; u < numVertices; u++) {
 
 			if (this.existeAresta(vertice, u))
@@ -49,15 +57,10 @@ public class Grafo {
 
 	}
 
-	public void retiraAresta(int v1, int v2) {
-
-		matrizAdjacentes[v1][v2] = -1;
-
-	}
+	public void removeAresta(int v1, int v2) { matrizAdjacentes[v1][v2] = -1; }
 
 	public void liberaGrafo() {
 
-		// Apaga todos os pesos do grafo
 		for (int i = 0; i < numVertices; i++)
 			for (int j = 0; j < numVertices; i++) {
 				matrizAdjacentes[i][j] = -1;
@@ -65,26 +68,5 @@ public class Grafo {
 
 	}
 
-	public int[][] getMatrizAdj() {
-
-		return matrizAdjacentes;
-
-	}
-
-	public void grafoTransposto() {
-
-		// TODO: Criar corpo do metodo
-
-	}
-
-	public void retiraMin() {
-
-		// TODO: Criar corpo do metodo
-
-	}
-
-	public int getNumVertices() {
-		return numVertices;
-	}
 
 }
