@@ -1,6 +1,7 @@
 package grafos.run;
 import grafos.Grafo;
 import grafos.frontend.ExibirGrafo;
+import grafos.userinterfaces.MainWindowFX;
 
 public class Main {
 
@@ -24,6 +25,9 @@ public class Main {
 				System.out.println(matriz[i][j]); }
 			}
 		
+		
+		/* Furuto Frontend */
+//		MainWindowFX.launch(MainWindowFX.class, args);
 		
 		exibir.run(numVerticies, matriz);
 		
