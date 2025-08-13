@@ -1,23 +1,43 @@
 package grafos.frontend;
-import org.graphstream.graph.*;
-import org.graphstream.graph.implementations.*;
+import org.graphstream.graph.Edge;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.MultiGraph;
+import org.graphstream.ui.fx_viewer.FxViewPanel;
+import org.graphstream.ui.fx_viewer.FxViewer;
+
 
 public class ExibirGrafo {
 	
 	private Graph grafo;
-	
-	public ExibirGrafo(String nome) {
-		System.setProperty("org.graphstream.ui", "swing");
-		
-		
-		grafo = new MultiGraph(nome);
-		String cssPath = ExibirGrafo.class.getResource("/style/style.css").toExternalForm();
-		
-		if (cssPath == null)
-			System.out.println("Stylepath não encontrado");
-		
-		grafo.setAttribute("ui.stylesheet", "url('"+ cssPath + "')");
-	}
+    private FxViewer viewer;
+    private FxViewPanel viewPanel;
+
+    // Constructor
+    public ExibirGrafo(String nome) {
+        System.setProperty("org.graphstream.ui", "javaFX"); // Configura para usar javaFX
+
+        // Cria objeto grafo
+        grafo = new MultiGraph(nome);
+
+        // Carrega CSS
+        String cssPath = ExibirGrafo.class.getResource("/style/style.css").toExternalForm();
+        if (cssPath == null) {
+            System.out.println("Stylepath não encontrado");
+        } else {
+            grafo.setAttribute("ui.stylesheet", "url('" + cssPath + "')");
+        }
+
+        // Cria Viewer Com javaFX
+        viewer = new FxViewer(grafo, FxViewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+
+        // Ativa layout automatico para ficar bonito
+        viewer.enableAutoLayout();
+
+        // Adiciona view normal
+        setViewPanel((FxViewPanel) viewer.addDefaultView(false)); // false = não usa Swing
+        
+        System.out.println("Criação do Panel Concluido");
+    }
 	
 	public void run(int numVerticies, int[][] matrizAdj) {
 	
@@ -40,16 +60,23 @@ public class ExibirGrafo {
 			}
 		}
 		
-		for (Edge e : grafo.getEachEdge()) {
-			if(e.getSourceNode().equals(e.getTargetNode())) {
-				Node no = e.getSourceNode();
-				no.setAttribute("ui.class", "auto");
-				no.setAttribute("ui.label", no.getId() + "🔁");
-				no.setAttribute("autoLopp", true);
-			}
-		}
-		
-		grafo.display();
+//		for (Edge e : grafo.getEachEdge()) {
+//			if(e.getSourceNode().equals(e.getTargetNode())) {
+//				Node no = e.getSourceNode();
+//				no.setAttribute("ui.class", "auto");
+//				no.setAttribute("ui.label", no.getId() + "🔁");
+//				no.setAttribute("autoLopp", true);
+//			}
+//		}
+		System.out.println("Display Executado");
+	}
+
+	public FxViewPanel getViewPanel() {
+		return viewPanel;
+	}
+
+	public void setViewPanel(FxViewPanel viewPanel) {
+		this.viewPanel = viewPanel;
 	}
 	
 	

@@ -1,18 +1,20 @@
 package grafos.run;
 import grafos.Grafo;
 import grafos.frontend.ExibirGrafo;
-import grafos.userinterfaces.MainWindowFX;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application{
 
-	public static void main(String[] args) {
-		
-			
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+
 		Grafo grafo = new Grafo(4);
-		ExibirGrafo exibir = new ExibirGrafo("Meu Grafo");
-		
 		int numVerticies = grafo.getNumVertices();
 		int[][] matriz = grafo.getMatrizAdj();
+		
 		
 		grafo.insereAresta(0, 1, 2);
 		grafo.insereAresta(1, 2, 1);
@@ -20,19 +22,25 @@ public class Main {
 		grafo.insereAresta(3, 1, 4);
 		grafo.insereAresta(1, 1, 0);
 		
-		for (int i = 0; i < numVerticies; i++) {
-			for (int j = 0; j < numVerticies; j++) {
-				System.out.println(matriz[i][j]); }
-			}
-		
-		
-		/* Furuto Frontend */
-//		MainWindowFX.launch(MainWindowFX.class, args);
-		
+		ExibirGrafo exibir = new ExibirGrafo("Meu Grafo");		
 		exibir.run(numVerticies, matriz);
+		
+		StackPane root = new StackPane();
+		root.getChildren().add(exibir.getViewPanel());
+		
+		Scene scene = new Scene(root, 800, 600);
+		primaryStage.setTitle("Graphsteam + javaFX");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+	public static void main(String[] args) {
+		
+		launch(args);
+		
 		
 		
 	}
+
 
 }
 
