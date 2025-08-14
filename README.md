@@ -2,17 +2,19 @@
 ## Trabalho de Estruturas de Dados II: Caminhos Mais Curtos
 
 ### Acesso ao projeto 📁
-❗ **Este projeto usa JDK 22+**, certifique-se de que está propriamente instalado e configurado o path
-❗ _**Este é um projeto Maven V3.9+**_, para importá-lo basta seguir os passos:
+❗ **Este projeto usa JDK 22+**, certifique-se de que está propriamente instalado e configurado o path <br>
+❗ _**Este é um projeto Maven V3.9+**_certifique-se de que está propriamente instalado e configurado com o path
 
 
 ### Instalar JDK 22 para windows
 1. Baixe o JDK pelo [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) ou [Adoptium](https://adoptium.net/)
 2. Instale o JDK 22 ou mais recente da sua escolha
-3. Configure as Variaveis de ambiente
+3. Configure as Variaveis de ambiente <br>
+   
 ```
-PATH=%JAVA_HOME%\bin;%PATH%
+set PATH=%JAVA_HOME%\bin;%PATH%
 ```
+
 4. Verifique a instalação: <br>
 
 ```
@@ -29,19 +31,19 @@ openjdk version "22.0.x"
 1. Acesse o site oficial [Apache Maven](https://maven.apache.org/download.cgi)
 2. Baixe a versão Binary zip archive 
 3. Extraia o arquivo .zip no diretório que desejar (por padrão, use C:\Arquivo_de_programas\Apache\Maven\ARQUIVO_DO_MAVEN como diretorio)
-4. Configure as variáveis de ambiente no terminal:
+4. Configure as variáveis de ambiente no terminal: <br>
 
 ```
-MAVEN_HOME=C:\SEU_DIRETORIO\MAVEN 
-PATH=%MAVEN_HOME%\bin;%PATH% 
+set MAVEN_HOME=C:\SEU_DIRETORIO\MAVEN 
+set PATH=%MAVEN_HOME%\bin;%PATH% 
 ```
-5. Certifique-se de que as variáveis estão configuradas
+5. Certifique-se de que as variáveis estão configuradas <br>
    
 ```
 mvn -v
 ```
 
-Voce deve ver algo como:
+Voce deve ver algo como: <br>
 
 ```
 Apache Maven 3.9.x
