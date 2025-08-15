@@ -60,15 +60,6 @@ public class ExibirGrafo {
 			}
 		}
 		
-//		for (Edge e : grafo.getEachEdge()) {
-//			if(e.getSourceNode().equals(e.getTargetNode())) {
-//				Node no = e.getSourceNode();
-//				no.setAttribute("ui.class", "auto");
-//				no.setAttribute("ui.label", no.getId() + "🔁");
-//				no.setAttribute("autoLopp", true);
-//			}
-//		}
-		System.out.println("Display Executado");
 	}
 
 	public FxViewPanel getViewPanel() {
