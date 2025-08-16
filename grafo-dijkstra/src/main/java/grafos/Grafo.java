@@ -39,20 +39,28 @@ public class Grafo {
 	
 	
 	/* Insere arestas com base no numero dos verticies e seu peso  */
-	public void insereAresta(int v1, int v2, int peso) {
+	public boolean insereAresta(int v1, int v2, int peso) {
 
-		if (this.existeAresta(v1, v2) == false) {
+		if (this.existeAresta(v1, v2) == 0) {
 			matrizAdjacentes[v1][v2] = peso;
+			return true;
 		}
+		
+		return false;
 
 	}
 	
-	public boolean existeAresta(int v1, int v2) {
-
-		if (matrizAdjacentes[v1][v2] != -1)
-			return true;
-
-		return false;
+	public int existeAresta(int v1, int v2) {
+		
+		boolean teste = v1 < matrizAdjacentes.length && v2 < matrizAdjacentes[v1].length; 
+		
+		if (!teste) 
+			return -1;
+		
+		if (matrizAdjacentes[v1][v2] != -1) {
+			return 1;
+			}
+		return 0;
 	}
 
 	public List<Integer> verticiesAdj(int vertice) {
@@ -60,7 +68,7 @@ public class Grafo {
 		List<Integer> vertices = new ArrayList<>();
 		for (int u = 0; u < numVertices; u++) {
 
-			if (this.existeAresta(vertice, u))
+			if (this.existeAresta(vertice, u) == 1)
 				vertices.add(u);
 		}
 
@@ -68,7 +76,15 @@ public class Grafo {
 
 	}
 
-	public void removeAresta(int v1, int v2) { matrizAdjacentes[v1][v2] = -1; }
+	public boolean removeAresta(int v1, int v2) { 
+		
+		if (this.existeAresta(v1, v2) == 1) {
+			matrizAdjacentes[v1][v2] = -1; 
+			return true;
+			}
+		
+		return false;
+		}
 
 	public void liberaGrafo() {
 

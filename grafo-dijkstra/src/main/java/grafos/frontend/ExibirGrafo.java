@@ -37,18 +37,22 @@ public class ExibirGrafo {
 	
 	public void run(Grafo g) {
 		
-		int numVerticies = g.getNumVertices();
+		int numVertices = g.getNumVertices();
 		int[][] matrizAdj = g.getMatrizAdj();
+		
+		if (numVertices == 0) 
+			return;
 		
 		grafo.clear();
 		this.carregaCSS();
 		
-		for (int i = 0; i < numVerticies; i++) {
+		
+		for (int i = 0; i < numVertices; i++) {
 			grafo.addNode(""+ i).setAttribute("ui.label", ""+ i);
 		}
 		
-		for (int i = 0; i < numVerticies; i++) {
-			for (int j = 0; j < numVerticies; j++) {
+		for (int i = 0; i < numVertices; i++) {
+			for (int j = 0; j < numVertices; j++) {
 				String idAresta = i + "-"+ j;
 				
 				if (matrizAdj[i][j] != -1) {
