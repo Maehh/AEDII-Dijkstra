@@ -89,7 +89,7 @@ public class PainelVertical {
 		Button adicionaAresta = new Button("Criar Aresta");
 		adicionaAresta.setOnAction(e -> {
 			Alert alerta = new Alert(Alert.AlertType.ERROR);
-			if (txtVertice1.getText().isEmpty()) {
+			if (txtVertice1.getText().isEmpty() ||txtVertice2.getText().isEmpty() || txtPeso.getText().isEmpty()) {
 				alerta.setHeaderText("Erro!");
 				alerta.setContentText("Campos vazios!");
 				alerta.showAndWait();
