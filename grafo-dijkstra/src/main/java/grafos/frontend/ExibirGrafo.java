@@ -5,6 +5,8 @@ import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.ui.fx_viewer.FxViewPanel;
 import org.graphstream.ui.fx_viewer.FxViewer;
 
+import grafos.Grafo;
+
 
 public class ExibirGrafo {
 	
@@ -18,15 +20,9 @@ public class ExibirGrafo {
 
         // Cria objeto grafo
         grafo = new MultiGraph(nome);
-
-        // Carrega CSS
-        String cssPath = ExibirGrafo.class.getResource("/style/style.css").toExternalForm();
-        if (cssPath == null) {
-            System.out.println("Stylepath não encontrado");
-        } else {
-            grafo.setAttribute("ui.stylesheet", "url('" + cssPath + "')");
-        }
-
+        
+        this.carregaCSS();
+        
         // Cria Viewer Com javaFX
         viewer = new FxViewer(grafo, FxViewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 
@@ -36,11 +32,17 @@ public class ExibirGrafo {
         // Adiciona view normal
         setViewPanel((FxViewPanel) viewer.addDefaultView(false)); // false = não usa Swing
         
-        System.out.println("Criação do Panel Concluido");
+        System.out.println("Cria Panel Concluido");
     }
 	
-	public void run(int numVerticies, int[][] matrizAdj) {
-	
+	public void run(Grafo g) {
+		
+		int numVerticies = g.getNumVertices();
+		int[][] matrizAdj = g.getMatrizAdj();
+		
+		grafo.clear();
+		this.carregaCSS();
+		
 		for (int i = 0; i < numVerticies; i++) {
 			grafo.addNode(""+ i).setAttribute("ui.label", ""+ i);
 		}
@@ -48,10 +50,8 @@ public class ExibirGrafo {
 		for (int i = 0; i < numVerticies; i++) {
 			for (int j = 0; j < numVerticies; j++) {
 				String idAresta = i + "-"+ j;
-				System.out.println("Aresta: " + idAresta);
 				
 				if (matrizAdj[i][j] != -1) {
-						System.out.println("Aceito.");
 						Edge e = grafo.addEdge(idAresta, String.valueOf(i), String.valueOf(j), true);
 						e.setAttribute("peso", matrizAdj[i][j]);
 						e.setAttribute("ui.label", matrizAdj[i][j]);
@@ -61,7 +61,16 @@ public class ExibirGrafo {
 		}
 		
 	}
-
+	private void carregaCSS() {
+		
+		String cssPath = ExibirGrafo.class.getResource("/style/style.css").toExternalForm();
+        if (cssPath == null) {
+            System.out.println("Stylepath não encontrado");
+        } else {
+            grafo.setAttribute("ui.stylesheet", "url('" + cssPath + "')");
+        }
+		
+	}
 	public FxViewPanel getViewPanel() {
 		return viewPanel;
 	}

@@ -21,7 +21,18 @@ public class Grafo {
 			for (int j = 0; j < numVertices; j++) {
 				matrizAdjacentes[i][j] = -1;
 			}
-
+	}
+	
+	public void atualizaGrafo(int numVertices) {
+		
+		this.liberaGrafo();
+		this.numVertices = numVertices;
+		matrizAdjacentes = new int[numVertices][numVertices];
+		
+		for (int i = 0; i < numVertices; i++)
+			for (int j = 0; j < numVertices; j++) {
+				matrizAdjacentes[i][j] = -1;
+			}
 	}
 	public int[][] getMatrizAdj() { return matrizAdjacentes; }
 	public int getNumVertices() { return numVertices; }
@@ -62,7 +73,7 @@ public class Grafo {
 	public void liberaGrafo() {
 
 		for (int i = 0; i < numVertices; i++)
-			for (int j = 0; j < numVertices; i++) {
+			for (int j = 0; j < numVertices; j++) {
 				matrizAdjacentes[i][j] = -1;
 			}
 
