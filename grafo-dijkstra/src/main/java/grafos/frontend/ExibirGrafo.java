@@ -35,7 +35,7 @@ public class ExibirGrafo {
         System.out.println("Cria Panel Concluido");
     }
 	
-	public void run(Grafo g) {
+	public void construirGrafo(Grafo g) {
 		
 		int numVertices = g.getNumVertices();
 		int[][] matrizAdj = g.getMatrizAdj();

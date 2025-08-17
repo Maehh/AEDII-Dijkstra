@@ -15,8 +15,9 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 
 		Grafo grafo = new Grafo(0);
+
 		ExibirGrafo exibir = new ExibirGrafo("Meu Grafo");		
-		exibir.run(grafo);
+		exibir.construirGrafo(grafo);
 		
 		
 		// Parte Central do grafo

@@ -36,6 +36,7 @@ public class PainelVertical {
 		configLabel.setFont(new Font("Arial", 20));
 		configLabel.setAlignment(Pos.TOP_CENTER);
 		
+		// Separadores
 		Separator sep1 = new Separator();
 		Separator sep2 = new Separator();
 		Separator sep3 = new Separator();
@@ -44,18 +45,18 @@ public class PainelVertical {
 		criaGrafoLabel.setFont(new Font("Arial", 18));
 		criaGrafoLabel.setAlignment(Pos.TOP_CENTER);
 		
-		/* Cria grafos novos */
+		/* Criar grafos novos */
 		Label nVerticesLabel = new Label("Nº de vertices: ");
 		TextField txtNVertices = new TextField();
 		txtNVertices.setTextFormatter(new TextFormatter<String>(filtro));
 		
 		/* Botao para adicionar grafos */
-		Button criarGrafo = new Button("Novo Grafo");		
-		criarGrafo.setOnAction(e -> {
+		Button btncriarGrafo = new Button("Novo Grafo");		
+		btncriarGrafo.setOnAction(_ -> {
 
 			if (txtNVertices.getText().isEmpty()) {
-				Alert alerta = new Alert(Alert.AlertType.ERROR);
-				alerta.setHeaderText("Erro!");
+				Alert alerta = new Alert(Alert.AlertType.WARNING);
+				alerta.setHeaderText("Aviso!");
 				alerta.setContentText("Campos vazios!");
 				alerta.showAndWait();
 				return;
@@ -63,12 +64,12 @@ public class PainelVertical {
 			int nVertices = Integer.parseInt(txtNVertices.getText());
 			System.out.println(nVertices);
 			grafo.atualizaGrafo(nVertices);
-			exibir.run(grafo);
+			exibir.construirGrafo(grafo);
 		});
 		
-		VBox criaGrafosFieldGroup = new VBox(5, nVerticesLabel, txtNVertices, criarGrafo);
+		VBox criaGrafosFieldGroup = new VBox(5, nVerticesLabel, txtNVertices, btncriarGrafo);
 		
-		/* Adiciona Arestas */
+		/* Adiciona e remove Arestas */
 		
 		Label addArestasLabel = new Label("Adiconar Arestas");
 		addArestasLabel.setFont(new Font("Arial", 18));
@@ -86,11 +87,11 @@ public class PainelVertical {
 		TextField txtPeso = new TextField();
 		txtPeso.setTextFormatter(new TextFormatter<String>(filtro));
 		
-		Button adicionaAresta = new Button("Criar Aresta");
-		adicionaAresta.setOnAction(e -> {
-			Alert alerta = new Alert(Alert.AlertType.ERROR);
+		Button btnadicionaAresta = new Button("Criar Aresta");
+		btnadicionaAresta.setOnAction(_ -> {
+			Alert alerta = new Alert(Alert.AlertType.WARNING);
 			if (txtVertice1.getText().isEmpty() ||txtVertice2.getText().isEmpty() || txtPeso.getText().isEmpty()) {
-				alerta.setHeaderText("Erro!");
+				alerta.setHeaderText("Aviso!");
 				alerta.setContentText("Campos vazios!");
 				alerta.showAndWait();
 				return;
@@ -102,20 +103,22 @@ public class PainelVertical {
 			boolean result = grafo.insereAresta(v1, v2, peso);
 			
 			if (!result) {
+				alerta.setAlertType(Alert.AlertType.ERROR);
 				alerta.setHeaderText("Erro!");
-				alerta.setContentText("Vertices " + v1 + " e " + v2 +" não existem OU já possuem relação. Favor inserir vertices válidas");
+				alerta.setContentText("Vertices " + v1 + " e " + v2 +" não existem OU já possuem relação. \nFavor inserir vertices válidas");
 				alerta.showAndWait();
 				return;
 			}
 			
-			exibir.run(grafo);
+			exibir.construirGrafo(grafo);
 		});
-		Button removeAresta = new Button("Remover Aresta");
-		removeAresta.setOnAction(e -> {
-			Alert alerta = new Alert(Alert.AlertType.ERROR);
+		
+		Button btnremoveAresta = new Button("Remover Aresta");
+		btnremoveAresta.setOnAction(_ -> {
+			Alert alerta = new Alert(Alert.AlertType.WARNING);
 			
 			if (txtVertice1.getText().isEmpty()) {
-				alerta.setHeaderText("Erro!");
+				alerta.setHeaderText("Aviso!");
 				alerta.setContentText("Campos vazios!");
 				alerta.showAndWait();
 				return;
@@ -126,20 +129,42 @@ public class PainelVertical {
 			int result = grafo.existeAresta(v1, v2);
 			
 			if (result == -1 || result == 0) {
-				alerta.setHeaderText("Erro!");
+				alerta.setHeaderText("Aviso!");
 				alerta.setContentText("Relação " + v1 + " e " + v2 +" não existem, favor inserir vertices válidas.");
 				alerta.showAndWait();
 				return;
 			}
 			grafo.removeAresta(v1, v2);
-			exibir.run(grafo);
+			exibir.construirGrafo(grafo);
 		});
 		
-		HBox criaArestasButtons = new HBox(5, adicionaAresta, removeAresta);
+		
+		/* Botão para executar algorítmo Dijkstra */
+		Button btnExecutaAlgoritmo = new Button("Executar");
+		btnExecutaAlgoritmo.setOnAction(_ -> {
+			if (grafo.getNumVertices() > 0) {
+				// TODO: Criar Algoritmo Dijkstra
+				
+				
+				
+				
+				
+				return;
+			}
+			
+			Alert alerta = new Alert(Alert.AlertType.WARNING);
+			alerta.setHeaderText("Aviso!");
+			alerta.setContentText("Não há grafo para executar, favor criar grafo!");
+			alerta.showAndWait();
+			return;
+		});
+		
+		HBox criaArestasButtons = new HBox(5, btnadicionaAresta, btnremoveAresta);
 		VBox criaArestasFieldGroup = new VBox(2, vertice1Label, txtVertice1, vertice2Label, txtVertice2, pesoLabel, txtPeso, criaArestasButtons);
 		
 		cxVertical.getChildren().addAll(configLabel, sep1, criaGrafoLabel,  criaGrafosFieldGroup);
 		cxVertical.getChildren().addAll(sep2, addArestasLabel, criaArestasFieldGroup);
+		cxVertical.getChildren().addAll(sep3, btnExecutaAlgoritmo);
 		
 		return cxVertical;
 	}
