@@ -1,0 +1,59 @@
+
+/* Aparencia do fundo. */
+graph {
+	padding:60px;
+	fill-color: #f8fafc;
+}
+
+/* Vertices */
+node {
+	
+	size: 25px;
+	shape: circle;
+	
+	fill-mode: gradient-vertical;
+	fill-color: #93c5fd, #3b82f6;
+	
+	stroke-mode: plain;
+	stroke-color: #1e3a8a;
+	stroke-width: 2px;
+	
+	text-mode:normal;
+	text-size: 14;
+	text-color: #000000;
+	
+	text-padding: 3px;
+	text-offset: 0, -2; 
+}
+
+node: hover {
+	size: 22px;
+	stroke-color: #000000;
+	z-index: 2;
+}
+
+node.destaque {
+	stroke-color: #fde047;
+	stroke-width: 3px;
+}
+
+edge {
+	size: 2px;
+	shape: cubic-curve;
+	
+	arrow-shape: arrow;
+	arrow-size: 10px, 5px;
+	
+	text-mode: normal;
+	text-size: 14;
+	text-color:  #334155;
+
+	text-background-mode: rounded-box;
+	text-background-color: #f1f5f9;
+	text-padding: 2px;
+	text-offset: 0, 2;
+	
+}
+
+/* =========== INTERAÇÕES PARA O ALGORÍTMO ================ */
+/* altere as classes de verticies/arestas especificas durante o percorrer do algorítmo Dijkstra */
