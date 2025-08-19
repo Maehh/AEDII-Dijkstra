@@ -2,7 +2,10 @@ package grafos.frontend;
 
 import java.util.function.UnaryOperator;
 
+import org.graphstream.graph.Graph;
+
 import grafos.Grafo;
+import grafos.algoritimos.Dijkstra;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -139,32 +142,48 @@ public class PainelVertical {
 		});
 		
 		
+		
 		/* Botão para executar algorítmo Dijkstra */
+		
+		Label origemLabel = new Label("Vertice de origem:");
+		TextField txtOrigem = new TextField();
+		txtOrigem.setTextFormatter(new TextFormatter<String>(filtro));
+		
 		Button btnExecutaAlgoritmo = new Button("Executar");
+		
 		btnExecutaAlgoritmo.setOnAction(_ -> {
+			Alert alerta = new Alert(Alert.AlertType.WARNING);
 			if (grafo.getNumVertices() > 0) {
-				// TODO: Criar Algoritmo Dijkstra
+			
+				if (txtOrigem.getText().isEmpty()) {
+					alerta.setHeaderText("Aviso!");
+					alerta.setContentText("Informe o ponto de origem!");
+					alerta.showAndWait();
+					return;
+				}
 				
+				int origem = Integer.parseInt(txtOrigem.getText());
 				
-				
+				Dijkstra dijkstra = new Dijkstra(grafo, exibir);
+				dijkstra.executar(origem);
 				
 				
 				return;
 			}
 			
-			Alert alerta = new Alert(Alert.AlertType.WARNING);
 			alerta.setHeaderText("Aviso!");
 			alerta.setContentText("Não há grafo para executar, favor criar grafo!");
 			alerta.showAndWait();
 			return;
 		});
 		
+		HBox executaAlgoritmo = new HBox(5, origemLabel, txtOrigem, btnExecutaAlgoritmo);
 		HBox criaArestasButtons = new HBox(5, btnadicionaAresta, btnremoveAresta);
 		VBox criaArestasFieldGroup = new VBox(2, vertice1Label, txtVertice1, vertice2Label, txtVertice2, pesoLabel, txtPeso, criaArestasButtons);
 		
 		cxVertical.getChildren().addAll(configLabel, sep1, criaGrafoLabel,  criaGrafosFieldGroup);
 		cxVertical.getChildren().addAll(sep2, addArestasLabel, criaArestasFieldGroup);
-		cxVertical.getChildren().addAll(sep3, btnExecutaAlgoritmo);
+		cxVertical.getChildren().addAll(sep3, executaAlgoritmo);
 		
 		return cxVertical;
 	}

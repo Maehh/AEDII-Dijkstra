@@ -1,4 +1,6 @@
 package grafos.run;
+import org.graphstream.graph.Graph;
+
 import grafos.Grafo;
 import grafos.frontend.ExibirGrafo;
 import grafos.frontend.PainelVertical;
@@ -15,9 +17,9 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 
 		Grafo grafo = new Grafo(0);
-
 		ExibirGrafo exibir = new ExibirGrafo("Meu Grafo");		
 		exibir.construirGrafo(grafo);
+		Graph grafoFront = exibir.getGraph();
 		
 		
 		// Parte Central do grafo
@@ -30,7 +32,7 @@ public class Main extends Application{
 		
 		/* Cria uma nova cena */
 		Scene scene = new Scene(grafoView, 800, 600);
-		primaryStage.setTitle("Graphsteam + javaFX");
+		primaryStage.setTitle("AEDII - Algoritmos Dijkstra");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		

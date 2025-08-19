@@ -83,6 +83,9 @@ public class ExibirGrafo {
 		this.viewPanel = viewPanel;
 	}
 	
+	public Graph getGraph() {
+		return grafo;
+	}
 	
 	
 }

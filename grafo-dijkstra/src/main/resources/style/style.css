@@ -19,6 +19,7 @@ node {
 	stroke-width: 2px;
 	
 	text-mode:normal;
+	text-style: bold;
 	text-size: 14;
 	text-color: #000000;
 	
@@ -39,7 +40,7 @@ node.destaque {
 
 edge {
 	size: 2px;
-	shape: cubic-curve;
+	shape: line;
 	
 	arrow-shape: arrow;
 	arrow-size: 10px, 5px;
@@ -57,3 +58,59 @@ edge {
 
 /* =========== INTERAÇÕES PARA O ALGORÍTMO ================ */
 /* altere as classes de verticies/arestas especificas durante o percorrer do algorítmo Dijkstra */
+
+
+/* Origem */
+node.source {
+  size: 22px;
+  fill-color: #4ade80, #16a34a;   /* verde */
+  stroke-color: #14532d;
+  stroke-width: 3px;
+}
+
+/* Destino */
+node.target {
+  size: 22px;
+  fill-color: #fb923c, #c2410c;   /* laranja */
+  stroke-color: #7c2d12;
+  stroke-width: 3px;
+}
+
+/* Vértice atual (sendo explorado) */
+node.current {
+  size: 22px;
+  fill-color: yellow;   /* amarelo */
+  stroke-color: #854d0e;
+  stroke-width: 3px;
+}
+
+/* Vértices já visitados */
+node.visited {
+  fill-color: #c4b5fd, #7c3aed;   /* roxo */
+  stroke-color: #4c1d95;
+  stroke-width: 2px;
+}
+
+/* Vértices no caminho final */
+node.path {
+  size: 30px;
+  fill-color: #38bdf8, #0284c7;   /* azul */
+  stroke-color: #075985;
+  stroke-width: 3px;
+}
+
+/* ===== Arestas ===== */
+
+/* Arestas do caminho final */
+edge.path {
+  size: 4px;
+  fill-color: #38bdf8;            /* azul */
+  arrow-size: 6px, 8px;
+}
+
+/* Aresta considerada como menor peso durante relaxamento */
+edge.relaxed {
+  size: 3px;
+  fill-color: #f59e0b;            /* laranja */
+  arrow-size: 11px, 6px;
+}
